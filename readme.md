@@ -6,6 +6,8 @@ In this project I intend to create a custom planetary orbit simulation - eventua
   - [The maths behind it](#the-maths-behind-it)
     - [The gravitational force between two bodies](#the-gravitational-force-between-two-bodies)
     - [The gravitational force between multiple bodies](#the-gravitational-force-between-multiple-bodies)
+    - [Calculating dynamics of planets](#calculating-dynamics-of-planets)
+      - [Naive approach](#naive-approach)
 
 
 ## The maths behind it
@@ -51,3 +53,29 @@ $$
 $$
 
 Where $\bold{F}_i$ is the total force acting on body i.
+
+### Calculating dynamics of planets
+
+We know from newtons 2nd law that:
+
+$$
+\bold{F} =
+    m\bold{a}
+$$
+
+aka `"force = mass * accelaration"`. Thus we can find the accelaration of the i'th planet:
+
+$$
+\bold{a}_i = \frac{1}{m}\bold{F}_i
+$$
+
+#### Naive approach
+
+This is the naive approach as we assume that the accelaration is constant in time (which isnt true) but if the time step is small enough this should not matter.
+
+If $\bold{a}_i = \frac{1}{m}\bold{F}_i$, then we should be able to calculate $\bold{v}_i$ and $\bold{x}_i$ by integrating with respect to time and using some initial conditions, i.e `inital velocity` and `inital displacement`.
+
+$$\bold{v}_i = \int_{t_1}^{t_2}\bold{a}_idt = \bold{a}_i(t_2-t_1)$$
+$$\bold{x}_i = \int_{t_1}^{t_2}\bold{v}_idt = \bold{a}_i(t_2-t_1)^2$$
+
+So long as our time steps are sufficiently small this method should yield some cohesive results.s
