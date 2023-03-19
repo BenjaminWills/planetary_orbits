@@ -30,7 +30,7 @@ class Forces:
         force = (G * planet_1.mass * planet_2.mass) / (distance**2)
         return -force * unit_direction
 
-    def calculate_total_force(self) -> Dict[str, np.array[float]]:
+    def calculate_total_force(self) -> Dict[str, np.array]:
         """To calculate the force we need to calculate the force on each body that is exerted by the other bodies.
 
         Returns
@@ -49,6 +49,8 @@ class Forces:
                     force_1_2 = force_1_2 + self.calculate_force(planet_1, planet_2)
                 else:
                     continue
+            planet_1.force = force_1_2
             forces.append(force_1_2)
 
-        return dict(zip(planet_names, forces))
+        # return dict(zip(planet_names, forces))
+        return forces

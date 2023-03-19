@@ -9,7 +9,12 @@ planet_logger = make_logger(logging_path="./logs/orbital.log", logger_name="PLAN
 
 class Planet:
     def __init__(
-        self, name: str, mass: float, radius: float, inital_position=np.array
+        self,
+        name: str,
+        mass: float,
+        radius: float,
+        inital_position: np.array,
+        initial_velocity: np.array,
     ) -> None:
         self.name = name
         self.mass = mass
@@ -17,6 +22,7 @@ class Planet:
         self.colour = self.__generate_planet_colour()
         self.forces = None
         self.position = inital_position
+        self.velocity = initial_velocity
 
         planet_logger.info(
             f"""

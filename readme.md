@@ -75,16 +75,44 @@ This is the naive approach as we assume that the accelaration is constant in tim
 
 If $\bold{a}_i = \frac{1}{m}\bold{F}_i$, then we should be able to calculate $\bold{v}_i$ and $\bold{x}_i$ by integrating with respect to time and using some initial conditions, i.e `inital velocity` and `inital displacement`.
 
-Suppose that the accelaration in an interval $[t_{\gamma},t_{\gamma+1}]$ - where ideally $t_{\gamma+1} - t_{\gamma} << 1$, is denoted by $\bold{a}_{i,\gamma}$ - the same goes for velocity and displacement.
+Suppose that the accelaration in an interval $[t_{\gamma},t_{\gamma+1}]$ - where ideally $t_{\gamma+1} - t_{\gamma} << 1$, is denoted by $\bold{a}_{i,\gamma}$ - the same goes for velocity and displacement. In each interval there is a change in the quantity, that I shall denote $\Delta \bold{v}_{i,\gamma}$ for example. It stands to reason that the position of a planet at timestep $\gamma$ is the sum of the previous position and the change in the time interval. For the sake of notation, define $t_{\gamma+1}-t_{\gamma} = \Delta t$.
 
 $$
-\bold{v}_{i,\gamma} = 
-    \bold{v}_{i,\gamma -1} + \int_{t_\gamma}^{t_{\gamma+1} }\bold{a}_{i,\gamma}dt = \bold{v}_{i,\gamma -1} +\bold{a}_{i,\gamma}(t_{\gamma+1}-t_{\gamma})
+\Delta\bold{v}_{i,\gamma} = 
+    \int_{t_\gamma}^{t_{\gamma+1}}{\bold{a}_{i,\gamma}}dt 
+    = 
+    {\bold{a}_{i,\gamma}}\Delta t
 $$
 
 $$
-\bold{x}_{i,\gamma} = 
-    \bold{x}_{i,\gamma -1} + \int_{t_\gamma}^{t_{\gamma+1} }\bold{v}_{i,\gamma}dt = \bold{x}_{i,\gamma -1} + \bold{v}_{i,\gamma}(t_{\gamma+1}-t_{\gamma})^2
+\bold{v}_{i,\gamma} 
+    = 
+    \bold{v}_{i,\gamma-1} + \Delta\bold{v}_{i,\gamma}
+    =
+    \bold{v}_{i,\gamma-1} + \bold{a}_{i,\gamma}\Delta t
 $$
 
-So long as our time steps are sufficiently small this method should yield some cohesive results.
+$$
+\Delta\bold{x}_{i,\gamma} = 
+    \int_{t_\gamma}^{t_{\gamma+1}}{\bold{v}_{i,\gamma}}dt
+    = 
+    \int_{t_\gamma}^{t_{\gamma+1}}{\bold{v}_{i,\gamma -1}+ \bold{a}_{i,\gamma}\Delta t}dt \\
+    = 
+    \bold{v}_{i,\gamma -1}\Delta t + \bold{a}_{i,\gamma}\Delta t^2
+$$
+
+$$
+\bold{x}_{i,\gamma} 
+    = 
+    \bold{x}_{i,\gamma-1} + \Delta\bold{x}_{i,\gamma} \\
+    =
+    \bold{x}_{i,\gamma-1} + \bold{v}_{i,\gamma -1}\Delta t + \bold{a}_{i,\gamma}\Delta t^2
+$$
+
+
+So long as our time steps are sufficiently small this method should yield some cohesive results. So we have our three equations for getting the orbital trajectory:
+
+1. $\bold{a}_{i,\gamma} = \frac{1}{m}\bold{F}_i$
+2. $\bold{v}_{i,\gamma} = \bold{v}_{i,\gamma-1} + \bold{a}_{i,\gamma}\Delta t$
+3. $\bold{x}_{i,\gamma} = \bold{x}_{i,\gamma-1} + \bold{v}_{i,\gamma -1}\Delta t + \bold{a}_{i,\gamma}\Delta t^2$
+
