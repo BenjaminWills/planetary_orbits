@@ -46,7 +46,6 @@ class Forces:
             force_1_2 = np.array([0, 0])
             for planet_2 in self.planets:
                 if planet_1 != planet_2:
-                    print(planet_1.name, planet_2.name)
                     force_1_2 = force_1_2 + self.calculate_force(planet_1, planet_2)
                 else:
                     continue
