@@ -8,6 +8,7 @@ In this project I intend to create a custom planetary orbit simulation - eventua
     - [The gravitational force between multiple bodies](#the-gravitational-force-between-multiple-bodies)
     - [Calculating dynamics of planets](#calculating-dynamics-of-planets)
       - [Naive approach](#naive-approach)
+    - [Analytical solution](#analytical-solution)
 
 
 ## The maths behind it
@@ -27,19 +28,19 @@ Note that this is the force that body i exerts on body j, here $m_i,m_j$ are the
 This force acts along the line between the bodies, we can calculate this direction as follows:
 
 $$
-\hat{\bold{r}}_{i,j} =
+\hat{\vec{r}}_{i,j} =
     \frac
-        {\bold{r}_j - \bold{r}_j}
-        {|\bold{r}_j - \bold{r}_j|}
+        {\vec{r}_j - \vec{r}_j}
+        {|\vec{r}_j - \vec{r}_j|}
 $$
 
 Thus the most complete form of the force is given by:
 
 $$
-\bold{F}_{i,j} = 
+\vec{F}_{i,j} = 
     -\frac
         {Gm_im_j}
-        {r_{i,j}^2}\hat{\bold{r}}_{i,j}
+        {r_{i,j}^2}\hat{\vec{r}}_{i,j}
 $$
 
 ### The gravitational force between multiple bodies
@@ -47,77 +48,94 @@ $$
 In the case of multiple body systems we need to consider the force that each body exerts on each other body that isn't it's-self, we can express this in our notation with a sum.
 
 $$
-\bold{F}_i =
+\vec{F}_i =
     \sum_{i \neq j}
-        \bold{F}_{i,j}
+        \vec{F}_{i,j}
 $$
 
-Where $\bold{F}_i$ is the total force acting on body i.
+Where $\vec{F}_i$ is the total force acting on body i.
 
 ### Calculating dynamics of planets
 
 We know from newtons 2nd law that:
 
 $$
-\bold{F} =
-    m\bold{a}
+\vec{F} =
+    m\vec{a}
 $$
 
 aka `"force = mass * accelaration"`. Thus we can find the accelaration of the i'th planet:
 
 $$
-\bold{a}_i = \frac{1}{m}\bold{F}_i
+\vec{a}_i = \frac{1}{m}\vec{F}_i
 $$
 
 #### Naive approach
 
 This is the naive approach as we assume that the accelaration is constant in time (which isnt true) but if the time step is small enough this should not matter.
 
-If $\bold{a}_i = \frac{1}{m}\bold{F}_i$, then we should be able to calculate $\bold{v}_i$ and $\bold{x}_i$ by integrating with respect to time and using some initial conditions, i.e `inital velocity` and `inital displacement`.
+If $\vec{a}_i = \frac{1}{m}\vec{F}_i$, then we should be able to calculate $\vec{v}_i$ and $\vec{x}_i$ by integrating with respect to time and using some initial conditions, i.e `inital velocity` and `inital displacement`.
 
-Suppose that the accelaration in an interval $[t_{\gamma},t_{\gamma+1}]$ - where ideally $t_{\gamma+1} - t_{\gamma} << 1$, is denoted by $\bold{a}_{i,\gamma}$ - the same goes for velocity and displacement. In each interval there is a change in the quantity, that I shall denote $\Delta \bold{v}_{i,\gamma}$ for example. It stands to reason that the position of a planet at timestep $\gamma$ is the sum of the previous position and the change in the time interval. For the sake of notation, define $t_{\gamma+1}-t_{\gamma} = \Delta t$.
+Suppose that the accelaration in an interval $[t_{\gamma},t_{\gamma+1}]$ - where ideally $t_{\gamma+1} - t_{\gamma} << 1$, is denoted by $\vec{a}_{i,\gamma}$ - the same goes for velocity and displacement. In each interval there is a change in the quantity, that I shall denote $\Delta \vec{v}_{i,\gamma}$ for example. It stands to reason that the position of a planet at timestep $\gamma$ is the sum of the previous position and the change in the time interval. For the sake of notation, define $t_{\gamma+1}-t_{\gamma} = \Delta t$.
 
 $$
-\Delta\bold{v}_{i,\gamma} = 
-    \int_{t_\gamma}^{t_{\gamma+1}}{\bold{a}_{i,\gamma}}dt 
+\Delta\vec{v}_{i,\gamma} = 
+    \int_{t_\gamma}^{t_{\gamma+1}}{\vec{a}_{i,\gamma}}dt 
     = 
-    {\bold{a}_{i,\gamma}}\Delta t
+    {\vec{a}_{i,\gamma}}\Delta t
 $$
 
 $$
-\bold{v}_{i,\gamma} 
+\vec{v}_{i,\gamma} 
     = 
-    \bold{v}_{i,\gamma-1} + \Delta\bold{v}_{i,\gamma}
+    \vec{v}_{i,\gamma-1} + \Delta\vec{v}_{i,\gamma}
     =
-    \bold{v}_{i,\gamma-1} + \bold{a}_{i,\gamma}\Delta t
+    \vec{v}_{i,\gamma-1} + \vec{a}_{i,\gamma}\Delta t
 $$
 
 $$
-\Delta\bold{x}_{i,\gamma} = 
-    \int_{t_\gamma}^{t_{\gamma+1}}{\bold{v}_{i,\gamma}}dt
+\Delta\vec{x}_{i,\gamma} = 
+    \int_{t_\gamma}^{t_{\gamma+1}}{\vec{v}_{i,\gamma}}dt
     = 
-    \int_{t_\gamma}^{t_{\gamma+1}}{\bold{v}_{i,\gamma -1}+ \bold{a}_{i,\gamma}\Delta t}dt \\
+    \int_{t_\gamma}^{t_{\gamma+1}}{\vec{v}_{i,\gamma -1}+ \vec{a}_{i,\gamma}\Delta t}dt \\
     = 
-    \bold{v}_{i,\gamma -1}\Delta t + \bold{a}_{i,\gamma}\Delta t^2
+    \vec{v}_{i,\gamma -1}\Delta t + \vec{a}_{i,\gamma}\Delta t^2
 $$
 
 $$
-\bold{x}_{i,\gamma} 
+\vec{x}_{i,\gamma} 
     = 
-    \bold{x}_{i,\gamma-1} + \Delta\bold{x}_{i,\gamma} \\
+    \vec{x}_{i,\gamma-1} + \Delta\vec{x}_{i,\gamma} \\
     =
-    \bold{x}_{i,\gamma-1} + \bold{v}_{i,\gamma -1}\Delta t + \bold{a}_{i,\gamma}\Delta t^2
+    \vec{x}_{i,\gamma-1} + \vec{v}_{i,\gamma -1}\Delta t + \vec{a}_{i,\gamma}\Delta t^2
 $$
 
 
 So long as our time steps are sufficiently small this method should yield some cohesive results. So we have our three equations for getting the orbital trajectory:
 
-1. $\bold{a}_{i,\gamma} = \frac{1}{m}\bold{F}_i$
-2. $\bold{v}_{i,\gamma} = \bold{v}_{i,\gamma-1} + \bold{a}_{i,\gamma}\Delta t$
-3. $\bold{x}_{i,\gamma} = \bold{x}_{i,\gamma-1} + \bold{v}_{i,\gamma -1}\Delta t + \bold{a}_{i,\gamma}\Delta t^2$
+1. $\vec{a}_{i,\gamma} = \frac{1}{m}\vec{F}_i$
+2. $\vec{v}_{i,\gamma} = \vec{v}_{i,\gamma-1} + \vec{a}_{i,\gamma}\Delta t$
+3. $\vec{x}_{i,\gamma} = \vec{x}_{i,\gamma-1} + \vec{v}_{i,\gamma -1}\Delta t + \vec{a}_{i,\gamma}\Delta t^2$
 
 This method yields the following:
 
 ![output](https://user-images.githubusercontent.com/90726430/226186864-a193f2f1-7ece-4620-95b5-f41d0c2bbdad.png)
 
 
+### Analytical solution
+
+Gravitational motion is defined by newtons second law, which can be expressed in derivative form:
+
+$$
+\frac
+    {d^2x}
+    {dt^2} = -\frac
+            {GM}
+            {r^2}
+$$
+
+We can place a star at the origin of our co-ordinate system, and our planet a distance `r` away. It is important to note that this motion is trapped in the x-y plane unless there is some initial velocity in the z direction, this allows us to find the angular momentum vector:
+
+$$
+\vec{L}
+$$
