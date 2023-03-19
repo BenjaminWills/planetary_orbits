@@ -127,15 +127,133 @@ This method yields the following:
 Gravitational motion is defined by newtons second law, which can be expressed in derivative form:
 
 $$
-\frac
+m\frac
     {d^2x}
     {dt^2} = -\frac
-            {GM}
+            {GMm}
             {r^2}
 $$
 
 We can place a star at the origin of our co-ordinate system, and our planet a distance `r` away. It is important to note that this motion is trapped in the x-y plane unless there is some initial velocity in the z direction, this allows us to find the angular momentum vector:
 
 $$
-\vec{L}
+\vec{L} = m \vec{r} \times \vec{v} \propto \delta \vec{\hat{z}}
 $$
+
+Note that $\vec{L}$ points in the z direction as it is perpendicular to the position and velocity, both of which lie in the x y plane.
+
+We can show that this quantity is conserved:
+
+$$
+\frac
+    {d\vec{L}}
+    {dt} = m \vec{v} \times \vec{v} + \vec{r} \times m\vec{a} = 0
+$$
+
+Since $m\vec{a} = \vec{F} \propto \vec{r}$ thus both cross products vanish and we have that the angular momentum is constant in time. 
+
+We also know that the energy of the system is constant in time.
+
+$$
+E 
+    = 
+    \frac
+        {1}
+        {2}
+        mv^2+u(r)
+$$
+Where we have the kinetic energy,$\frac{1}{2}mv^2$, and the potential energy, $u(r)$,contributing.
+
+But what is $v$? We can find v using polar co-ordinates, say we define some displacement from the origin as $f(r) = r\vec{\hat{r}}$ then:
+
+$$
+\frac{df}{dt} 
+    = 
+    \frac{dr}{dt}\vec{\hat{r}} + \frac{d\vec{\hat{r}}}{dt}r 
+    \\ = \\ 
+    \frac{dr}{dt}\vec{\hat{r}} + r \frac{d\theta}{dt}\vec{\hat{\theta}}
+$$
+
+Thus we can find $v^2$ easily as polar co-ordinates $\vec{\hat{r}} \text{ and } \vec{\hat{\theta}}$ form an orthogonal basis:
+
+$$
+v^2 = (\frac{dr}{dt})^2 + (r\frac{d\theta}{dt})^2
+$$
+
+Hence the energy becomes:
+
+$$
+E = \frac{1}{2}m(\frac{dr}{dt})^2 + \frac{1}{2}m(r\frac{d\theta}{dt})^2 - k/r
+$$
+
+Where $k = GMm$. We know that the magnitdue of the angular velocity (from the defintion of the cross product) is $L = mrv_\perp$, but $v_\perp$ is simply the angular velocity of the planet, and hence $L = mr^2\frac{d\theta}{dt}$, this fact allows us to remove the dependency on $\theta$ from our equation for energy. The energy becomes:
+
+$$
+E = \frac{1}{2}m(\frac{dr}{dt})^2 + \frac{L^2}{2mr^2} - \frac{k}{r}
+$$
+
+Now our energy is simply a function of radius and time. We can rearrange the energy equation to make $\frac{dr}{dt}$ the subject:
+
+$$
+(\frac{dr}{dt})^2 = \frac{2E}{m} - \frac{L^2}{m^2r^2} - \frac{2k}{mr}
+$$
+
+And our equation for $\theta$ is given by:
+
+$$
+\frac{d\theta}{dt} = \frac{L}{mr^2}
+$$
+
+We can now find a link between $r$ and $\theta$, by dividing these derivatives since:
+
+$$
+\frac
+    {\frac{dr}{dt}}
+    {\frac{d\theta}{dt}} = \frac{dr}{d\theta}
+$$
+
+This yields:
+
+$$
+(\frac{L}{mr^2})^2 (\frac{dr}{d\theta})^2 
+    =
+    \frac{2E}{m} - \frac{L^2}{m^2r^2} - \frac{2k}{mr}
+$$
+
+To solve this differential equation we can make a substitution, $u = \frac{L^2}{km}\frac{1}{r}$, the differential equation then becomes:
+
+$$
+\frac{d^2u}{d\theta^2} = -u^2 +2u + \frac{2EL^2}{mk^2}
+$$
+
+We can then differentiate again w.r.t $\theta$
+
+$$
+2\cancel{\frac{du}{d\theta}}\frac{d^2u}{d\theta^2} = -2u\cancel{\frac{du}{d\theta}}+ 2\cancel{\frac{du}{d\theta}}
+$$
+
+Which ends up becoming:
+
+$$
+\frac{d^2u}{d\theta^2} = -u + 1
+$$
+
+Thus using simple solution techniques for non homogenous differential equations we can find $u(\theta)$.
+
+$$
+\therefore u(\theta) = \epsilon cos(\theta) + 1
+$$
+
+We can now find our constant of integration $\epsilon$ by substituting into the non differentiated u equation:
+
+$$
+\epsilon = \sqrt{1+\frac{2EL^2}{mk^2}}
+$$
+
+Hence and finally:
+
+$$
+r(\theta) = \frac{L^2}{km} \frac{1}{1+\epsilon cos(\theta)}
+$$
+
+This is the equation of a planet orbiting the a star, we see that this is the polar equation for a conic section, whos conic classification is defined by the value of $\epsilon$ aka the ecentricity.
