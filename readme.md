@@ -116,3 +116,8 @@ So long as our time steps are sufficiently small this method should yield some c
 2. $\bold{v}_{i,\gamma} = \bold{v}_{i,\gamma-1} + \bold{a}_{i,\gamma}\Delta t$
 3. $\bold{x}_{i,\gamma} = \bold{x}_{i,\gamma-1} + \bold{v}_{i,\gamma -1}\Delta t + \bold{a}_{i,\gamma}\Delta t^2$
 
+This method yields the following:
+
+![output](https://user-images.githubusercontent.com/90726430/226186864-a193f2f1-7ece-4620-95b5-f41d0c2bbdad.png)
+
+
