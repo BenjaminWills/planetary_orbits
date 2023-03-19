@@ -75,7 +75,16 @@ This is the naive approach as we assume that the accelaration is constant in tim
 
 If $\bold{a}_i = \frac{1}{m}\bold{F}_i$, then we should be able to calculate $\bold{v}_i$ and $\bold{x}_i$ by integrating with respect to time and using some initial conditions, i.e `inital velocity` and `inital displacement`.
 
-$$\bold{v}_i = \int_{t_1}^{t_2}\bold{a}_idt = \bold{a}_i(t_2-t_1)$$
-$$\bold{x}_i = \int_{t_1}^{t_2}\bold{v}_idt = \bold{a}_i(t_2-t_1)^2$$
+Suppose that the accelaration in an interval $[t_{\gamma},t_{\gamma+1}]$ - where ideally $t_{\gamma+1} - t_{\gamma} << 1$, is denoted by $\bold{a}_{i,\gamma}$ - the same goes for velocity and displacement.
 
-So long as our time steps are sufficiently small this method should yield some cohesive results.s
+$$
+\bold{v}_{i,\gamma} = 
+    \bold{v}_{i,\gamma -1} + \int_{t_\gamma}^{t_{\gamma+1} }\bold{a}_{i,\gamma}dt = \bold{v}_{i,\gamma -1} +\bold{a}_{i,\gamma}(t_{\gamma+1}-t_{\gamma})
+$$
+
+$$
+\bold{x}_{i,\gamma} = 
+    \bold{x}_{i,\gamma -1} + \int_{t_\gamma}^{t_{\gamma+1} }\bold{v}_{i,\gamma}dt = \bold{x}_{i,\gamma -1} + \bold{v}_{i,\gamma}(t_{\gamma+1}-t_{\gamma})^2
+$$
+
+So long as our time steps are sufficiently small this method should yield some cohesive results.
