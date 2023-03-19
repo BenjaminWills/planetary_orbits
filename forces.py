@@ -49,7 +49,6 @@ class Forces:
                     force_1_2 = force_1_2 + self.calculate_force(planet_1, planet_2)
                 else:
                     continue
-            planet_1.force = force_1_2
             forces.append(force_1_2)
 
         # return dict(zip(planet_names, forces))
