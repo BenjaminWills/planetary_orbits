@@ -1,0 +1,44 @@
+import numpy as np
+
+from numpy.linalg import norm
+from typing import List
+
+from planets import Planet
+from utilities.make_logger import make_logger
+
+G = 6.6743e-11
+
+force_logger = make_logger("./logs/orbital.log", logger_name="FORCES")
+
+
+class Forces:
+    def __init__(self, planets: List[Planet]) -> None:
+        self.planets = planets
+
+        force_logger.info(
+            f"""
+            Calculating forces for the planets: {[planet.name for planet in planets]}
+            """
+        )
+
+    def calculate_force(self, planet_1: Planet, planet_2: Planet) -> float:
+        force = (G * planet_1.mass * planet_2.mass) / norm(
+            planet_1.position - planet_2.position
+        )
+        return -force
+
+    def calculate_total_force(self) -> List[float]:
+        """To calculate the force we need to calculate the force on each body that is exerted by the other bodies.
+
+        Returns
+        -------
+        List[float]
+            A list of forces that act along the unit vector between each planet.
+        """
+
+        for planet_1 in self.planets:
+            for planet_2 in self.planets:
+                if planet_1 != planet_2:
+                    continue
+                else:
+                    continue
