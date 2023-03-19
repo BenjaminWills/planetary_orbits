@@ -16,6 +16,8 @@ Here is all of the theory behind the code in this repository.
 
 We can express the magnitude of the graviatational force between two bodies, i and j, using the following formula:
 
+<img width="600" alt="Screenshot 2023-03-19 at 12 14 38" src="https://user-images.githubusercontent.com/90726430/226174607-2f524f2b-6dae-4bc4-bc34-0e75dcc5f777.png">
+
 $$F_{i,j} = -\frac{Gm_im_j}{r_{i,j}^2}$$
 
 Note that this is the force that body i exerts on body j, here $m_i,m_j$ are the masses of body i and j respectively and $r_{i,j}$ is the distance between them. The force is negative as gravity is `attractive` meaning that the force always points towards the other body. 
