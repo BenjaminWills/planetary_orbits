@@ -24,10 +24,30 @@ Note that this is the force that body i exerts on body j, here $m_i,m_j$ are the
 
 This force acts along the line between the bodies, we can calculate this direction as follows:
 
-$$\hat{\bold{r}}_{i,j} =\frac{\bold{r}_j - \bold{r}_j}{|\bold{r}_j - \bold{r}_j|}$$
+$$
+\hat{\bold{r}}_{i,j} =
+    \frac
+        {\bold{r}_j - \bold{r}_j}
+        {|\bold{r}_j - \bold{r}_j|}
+$$
 
 Thus the most complete form of the force is given by:
 
-$$\bold{F}_{i,j} = -\frac{Gm_im_j}{r_{i,j}^2}\hat{\bold{r}}_{i,j}$$
+$$
+\bold{F}_{i,j} = 
+    -\frac
+        {Gm_im_j}
+        {r_{i,j}^2}\hat{\bold{r}}_{i,j}
+$$
 
 ### The gravitational force between multiple bodies
+
+In the case of multiple body systems we need to consider the force that each body exerts on each other body that isn't it's-self, we can express this in our notation with a sum.
+
+$$
+\bold{F}_i =
+    \sum_{i \neq j}
+        \bold{F}_{i,j}
+$$
+
+Where $\bold{F}_i$ is the total force acting on body i.
