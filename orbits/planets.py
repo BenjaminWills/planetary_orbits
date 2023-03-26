@@ -56,7 +56,7 @@ class Planet:
         period = circumference / velocity
         """
         circumference = np.pi * 2 * self.radius
-        period = circumference / norm(self.velocity)
+        period = circumference // norm(self.velocity)
         print(f"{self.name} has an orbital period of {period/(60*60*24*365)} years")
         return period
 
