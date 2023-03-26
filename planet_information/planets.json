@@ -1,0 +1,18 @@
+{
+    "planets":[
+        {
+            "name": "earth",
+            "mass": 5.972e24,
+            "radius": 6371e3,
+            "inital_position": [149.6e9, 0],
+            "initial_velocity": [0, 29951.68]
+        },
+        {
+            "name": "sun",
+            "mass": 1.989e30,
+            "radius": 696340e3,
+            "inital_position": [0, 0],
+            "initial_velocity": [0, 0]
+        }
+    ]
+}
