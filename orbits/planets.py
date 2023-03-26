@@ -57,3 +57,21 @@ class Planet:
             inital_position=np.array(planet_info.get("initial_position")),
             initial_velocity=np.array(planet_info.get("initial_velocity")),
         )
+
+    @staticmethod
+    def load_multiple_from_json(json_path: str) -> list:
+        with open(json_path, "r") as planet_information:
+            planet_info = json.load(planet_information)
+
+        planet_list = []
+
+        for planet in planet_info.get("planets"):
+            p = Planet(
+                name=planet.get("name"),
+                mass=planet.get("mass"),
+                radius=planet.get("radius"),
+                inital_position=np.array(planet.get("initial_position")),
+                initial_velocity=np.array(planet.get("initial_velocity")),
+            )
+            planet_list.append(p)
+        return planet_list
