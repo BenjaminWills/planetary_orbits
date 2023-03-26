@@ -2,7 +2,7 @@ import numpy as np
 
 from typing import List
 
-from utilities.make_logger import make_logger
+from orbits.utilities.make_logger import make_logger
 
 planet_logger = make_logger(logging_path="./logs/orbital.log", logger_name="PLANETS")
 

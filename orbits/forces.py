@@ -3,8 +3,8 @@ import numpy as np
 from numpy.linalg import norm
 from typing import List, Dict
 
-from planets import Planet
-from utilities.make_logger import make_logger
+from orbits.planets import Planet
+from orbits.utilities.make_logger import make_logger
 
 G = 6.6743e-11
 

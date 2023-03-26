@@ -1,8 +1,7 @@
 from typing import List
-from numpy import array
 
-from forces import Forces
-from planets import Planet
+from orbits.forces import Forces
+from orbits.planets import Planet
 
 
 class Trajectory:
@@ -44,7 +43,7 @@ class Trajectory:
 
         self.planets = updated_planets
 
-    def calculate_trajectories(self):
+    def calculate_trajectories(self) -> dict:
         position_dict = dict(
             zip(self.planet_names, [[planet.position] for planet in self.planets])
         )
