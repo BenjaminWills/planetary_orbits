@@ -1,4 +1,5 @@
 import numpy as np
+import json
 
 from typing import List
 
@@ -44,3 +45,15 @@ class Planet:
         """
         rgb_colour = list(np.random.choice(range(256), size=3))
         return rgb_colour
+
+    @staticmethod
+    def load_from_json(json_path: str):
+        with open(json_path, "r") as planet_information:
+            planet_info = json.load(planet_information)
+        return Planet(
+            name=planet_info.get("name"),
+            mass=planet_info.get("mass"),
+            radius=planet_info.get("radius"),
+            inital_position=np.array(planet_info.get("initial_position")),
+            initial_velocity=np.array(planet_info.get("initial_velocity")),
+        )
