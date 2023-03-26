@@ -2,6 +2,7 @@ import numpy as np
 import json
 
 from typing import List
+from numpy.linalg import norm
 
 from orbits.utilities.make_logger import make_logger
 
@@ -45,6 +46,19 @@ class Planet:
         """
         rgb_colour = list(np.random.choice(range(256), size=3))
         return rgb_colour
+
+    def calculate_period(self) -> int:
+        """
+        to calculate the period we just do a crude distance over time calculation.
+
+        circumference = 2 pi r
+
+        period = circumference / velocity
+        """
+        circumference = np.pi * 2 * self.radius
+        period = circumference / norm(self.velocity)
+        print(f"{self.name} has an orbital period of {period/(60*60*24*365)} years")
+        return period
 
     @staticmethod
     def load_from_json(json_path: str):
