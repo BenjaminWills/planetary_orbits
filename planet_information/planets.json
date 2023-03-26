@@ -13,6 +13,13 @@
             "radius": 696340e3,
             "inital_position": [0, 0],
             "initial_velocity": [0, 0]
+        },
+        {
+            "name": "venus",
+            "mass": 4.867e24,
+            "radius": 6051.8e3,
+            "inital_position": [107.71e9, 0],
+            "initial_velocity": [0, 35021.561]
         }
     ]
 }
