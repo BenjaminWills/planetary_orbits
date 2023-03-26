@@ -70,7 +70,7 @@ class Planet:
                 name=planet.get("name"),
                 mass=planet.get("mass"),
                 radius=planet.get("radius"),
-                inital_position=np.array(planet.get("initial_position")),
+                inital_position=np.array(planet.get("inital_position")),
                 initial_velocity=np.array(planet.get("initial_velocity")),
             )
             planet_list.append(p)
